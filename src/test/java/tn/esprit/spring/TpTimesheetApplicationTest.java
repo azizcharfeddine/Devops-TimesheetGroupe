@@ -101,7 +101,7 @@ private	IEntrepriseService entrepriseservice;
 	 		}
 	 		catch (Exception e) {l.error("Erreur dans testDeleteEmployeById() : " + e);}
 	          }
-	   //ll
+	   //ll666
 	   @Autowired
 		@Test
 	   public void testAffecterEmployeADepartement() {
