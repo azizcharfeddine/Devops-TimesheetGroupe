@@ -25,7 +25,8 @@ public class Departement implements Serializable {
 	private int id;
 	
 	private String name;
-	//aaziz
+	//aazazeazeaze
+	//azeazeazeazeaz
 	//@JsonManagedReference 
 	@JsonIgnore
 	@ManyToMany
