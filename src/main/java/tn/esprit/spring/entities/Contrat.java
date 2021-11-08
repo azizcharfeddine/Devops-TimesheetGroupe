@@ -29,7 +29,7 @@ public class Contrat implements Serializable {
 	
 	@OneToOne
 	private Employe employe;
-
+    //azzz
 	public Contrat() {
 		super();
 	}
