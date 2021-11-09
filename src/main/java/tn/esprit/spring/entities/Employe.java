@@ -39,6 +39,7 @@ public class Employe implements Serializable {
 	private boolean isActif;
 	
 	@Enumerated(EnumType.STRING)
+	//azizpipeline
 	//@NotNull
 	private Role role;
 	//aziz entiry
