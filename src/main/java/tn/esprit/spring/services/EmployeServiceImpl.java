@@ -3,7 +3,6 @@ package tn.esprit.spring.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,19 +37,14 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
-		Optional <Employe> employe1 = employeRepository.findById(employeId);
-		if (employe1.isPresent()) {
-			Employe employe = employeRepository.findById(employeId).get(); // no issue
-			employe.setEmail(email);
-			employeRepository.save(employe);
-		}
-
+		Employe employe = employeRepository.findById(employeId).get();
+		employe.setEmail(email);
+		employeRepository.save(employe);
 
 	}
 
 	@Transactional	
 	public void affecterEmployeADepartement(int employeId, int depId) {
-		
 		Departement depManagedEntity = deptRepoistory.findById(depId).get();
 		Employe employeManagedEntity = employeRepository.findById(employeId).get();
 
@@ -64,12 +58,12 @@ public class EmployeServiceImpl implements IEmployeService {
 			depManagedEntity.getEmployes().add(employeManagedEntity);
 
 		}
-		}
 
+	}
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		Departement dep = deptRepoistory.findById(depId).orElse(null);
+		Departement dep = deptRepoistory.findById(depId).get();
 
 		int employeNb = dep.getEmployes().size();
 		for(int index = 0; index < employeNb; index++){
@@ -100,17 +94,15 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 	public void deleteEmployeById(int employeId)
 	{
-		Optional<Employe> employe1 = employeRepository.findById(employeId);
-		if (employe1.isPresent()) {
-			
-			Employe employe = employe1.get();
+		Employe employe = employeRepository.findById(employeId).get();
+
 		for(Departement dep : employe.getDepartements()){
 			dep.getEmployes().remove(employe);
 		}
 
 		employeRepository.delete(employe);
 	}
-	}
+
 	public void deleteContratById(int contratId) {
 		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
 		contratRepoistory.delete(contratManagedEntity);
