@@ -2,6 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,12 +53,16 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
+		Optional <Entreprise> entreprise = entrepriseRepoistory.findById(entrepriseId);
+		if (entreprise.isPresent()) {
+		entrepriseRepoistory.delete(entreprise.get());	}
 	}
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
-		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
+		Optional <Departement> depart = deptRepoistory.findById(depId);
+		if (depart.isPresent()) {
+		deptRepoistory.delete(depart.get());}	
 	}
 
 
