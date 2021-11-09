@@ -101,7 +101,6 @@ private	IEntrepriseService entrepriseservice;
 	 		}
 	 		catch (Exception e) {l.error("Erreur dans testDeleteEmployeById() : " + e);}
 	          }
-	   //aziz202020
 	   @Autowired
 		@Test
 	   public void testAffecterEmployeADepartement() {
