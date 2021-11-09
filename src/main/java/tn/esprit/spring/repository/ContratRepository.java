@@ -8,6 +8,6 @@ import tn.esprit.spring.entities.Contrat;
 
 public interface ContratRepository extends CrudRepository<Contrat, Integer>{
 
-	Optional<Contrat> findByEmploye_Id(int id_employe);
+	Optional<Contrat> findByEmployeId(int idEmploye);
 
 } 
