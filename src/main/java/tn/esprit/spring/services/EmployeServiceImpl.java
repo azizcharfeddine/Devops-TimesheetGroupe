@@ -69,14 +69,17 @@ public class EmployeServiceImpl implements IEmployeService {
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		Departement dep = deptRepoistory.findById(depId).get();
-
+		Optional <Departement> dep1 = deptRepoistory.findById(depId);
+		if (dep1.isPresent()) {
+			
+		Departement dep = dep1.get();
 		int employeNb = dep.getEmployes().size();
 		for(int index = 0; index < employeNb; index++){
 			if(dep.getEmployes().get(index).getId() == employeId){
 				dep.getEmployes().remove(index);
 				break;
 			}
+		}
 		}
 	}
 
@@ -107,8 +110,8 @@ public class EmployeServiceImpl implements IEmployeService {
 	public void deleteEmployeById(int employeId)
 	{
 		Optional<Employe> employe1 = employeRepository.findById(employeId);
-		if (employe1.isPresent()) {
-			
+		
+		if 	(employe1.isPresent()) {
 			Employe employe = employe1.get();
 		for(Departement dep : employe.getDepartements()){
 			dep.getEmployes().remove(employe);
@@ -118,9 +121,11 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 	}
 	public void deleteContratById(int contratId) {
-		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
+		Optional <Contrat> contratManagedEntity1 = contratRepoistory.findById(contratId);
+		if (contratManagedEntity1.isPresent()) {
+		Contrat contratManagedEntity = contratManagedEntity1.get();
 		contratRepoistory.delete(contratManagedEntity);
-
+		}
 	}
 
 	public int getNombreEmployeJPQL() {
