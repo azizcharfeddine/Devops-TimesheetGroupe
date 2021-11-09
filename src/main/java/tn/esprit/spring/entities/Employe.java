@@ -41,7 +41,7 @@ public class Employe implements Serializable {
 	@Enumerated(EnumType.STRING)
 	//@NotNull
 	private Role role;
-	
+	//aziz entiry
 	//@JsonBackReference  
 	@JsonIgnore
 	@ManyToMany(mappedBy="employes",fetch=FetchType.EAGER )
