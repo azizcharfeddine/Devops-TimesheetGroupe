@@ -1,6 +1,8 @@
 package tn.esprit.spring;
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,10 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
+import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
+import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.EmployeServiceImpl;
@@ -30,6 +33,8 @@ public class TpTimesheetApplicationTest {
 	@Autowired
 private EmployeRepository employerep;
 	@Autowired
+private ContratRepository crep;
+	@Autowired
 private EmployeServiceImpl employeservices;
 	@Autowired
 private	DepartementRepository drep;
@@ -40,126 +45,82 @@ private	IEntrepriseService entrepriseservice;
 	private static final Logger l = LoggerFactory.getLogger(TpTimesheetApplicationTest.class);
 	@Autowired
 		@Test
-	public void testAjouterEmploye() {
+	public void testAjouterContrat() {
 		try{
-	     l.info("In testAjouterEmploye():");
-         List <Employe> employes = employeservices.getAllEmployes();
-         int expected = employes.size();
-         l.info("nombre d'employes avant l'ajout: " + expected);
-         Employe emp =new Employe("aziz","charfeddine","azizcharfeddine@gmail.com",false,Role.INGENIEUR);
-         l.info("l'ajout l'employe: " + emp);
-         int id_employe = employeservices.ajouterEmploye(emp);
+	     l.info("In testAjouterContrat:");
+         List <Contrat> contrats = (List<Contrat>) crep.findAll();
+         int existant = contrats.size();
+         l.info("nombre de contrat: " + existant);
+         String date1="7/05/2020";  
+         Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);  
+         Contrat cont =new Contrat(date2,"temp",700);
+         l.info("l'ajout du contrat : " + cont);
+         int refContrat = employeservices.ajouterContrat(cont);
 	     l.info("comparaison size avant et apres l'ajout.");
-         assertEquals(expected+1, employeservices.getAllEmployes().size());
-         l.info("assurer que l'Id de l'employer not null.");
-         assertNotNull(id_employe);
+         assertEquals(existant+1, ((List<Contrat>) crep.findAll()).size());
+         l.info("assurer que la reference du contrat n est pas nulle.");
+         assertNotNull(refContrat);
          l.info("vider la base de donneé.");
+         crep.deleteAll();
          employerep.deleteAll();
 		}
-		catch (Exception e) {l.error("Erreur dans testAjouterEmploye() : " + e);}
-         }
-
-	   @Autowired
-		@Test
-	public void testMettreAjourEmailByEmployeId() {
-		try{
-			l.info("In testMettreAjourEmailByEmployeId():");
-         Employe emp =new Employe("aziz","charfeddine","azizcharfeddine@gmail.com",false,Role.INGENIEUR);
-         l.info("ajouter un employe dans ola base de dannée "+emp);
-         int id_employe = employeservices.ajouterEmploye(emp);
-         l.info("prendre l'id de l'employe:"+id_employe);
-         employeservices.mettreAjourEmailByEmployeId("aziz", id_employe);
-         Employe emp_modifier =employerep.findById(id_employe).get();
-         l.info("metre ajour l'adresse email de l'employe: "+emp);
-         assertNotEquals(emp.getEmail(), emp_modifier.getEmail());
-         l.info("verifier que email de employe" + emp+ "est modifier");
-         employerep.deleteAll();
-         l.info("vider la base de donneé.");
+		catch (Exception e) {l.error("Erreur dans testAjouterContrat() : " + e);
 		}
-		catch (Exception e) {l.error("Erreur dans testMettreAjourEmailByEmployeId() : " + e);}
-         }
-	   
-	   @Autowired
-	 		@Test
-	 	public void testDeleteEmployeById() {
-	 		try{
-	 			 l.info("In testDeleteEmployeById():");
-	 			 Employe emp =new Employe("aziz","charfeddine","azizcharfeddine@gmail.com",false,Role.INGENIEUR);
-	 			 l.info("ajouter un employe dans ola base de dannée "+emp);
-	 	         int id_employe = employeservices.ajouterEmploye(emp);
-	 	         l.info("prendre l'id de l'employe:"+id_employe);
-	 			 List <Employe> employes = employeservices.getAllEmployes();
-	 			 l.info("prendre la liste de tous les employes");
-	 	         int expected = employes.size();
-	 	         l.info("nombre d'employes apres l'ajout: " + expected);
-	 	         employeservices.deleteEmployeById(id_employe);
-	 	         l.info("delete l'employe"+emp);
-	 	         assertEquals(expected-1, employeservices.getAllEmployes().size());
-	 	         l.info("comparaison size avant et apres la supression.");
-	 	         employerep.deleteAll();
-	 	         l.info("vider la base de donneé.");
-	 		}
-	 		catch (Exception e) {l.error("Erreur dans testDeleteEmployeById() : " + e);}
-	          }
-	   //ll666
+		}
+		
 	   @Autowired
 		@Test
-	   public void testAffecterEmployeADepartement() {
+	   public void testAffecterContratAEmploye() {
 	 		try{
 	 			 l.info("In testAffecterEmployeADepartement():");
-	 			 Employe emp =new Employe("aziz","charfeddine","azizcharfeddine@gmail.com",false,Role.INGENIEUR);
+	 			 Employe emp =new Employe("Mohamed","Rezgui","123@gmail.com",false,Role.INGENIEUR);
 	 			 l.info("creation d'un employe"+emp);
-	 			 Departement D=new Departement("Ressources Humaines");
-	 			 l.info("creation d'un departement"+D);
-	 			 int id_departement=entrepriseservice.ajouterDepartement(D);
-	 		     l.info("ajouter le departement dans la base de deonneés");
+	 			 String date1="7/05/2020";  
+	 	         Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);  
+	 	         Contrat cont =new Contrat(date2,"temp",700);
+	 			 l.info("creation d'un contrat"+cont);
+	 			 int refContrat=employeservices.ajouterContrat(cont);
+	 		     l.info("ajouter le contrat dans la base de deonneés");
 	 			 int id_employe = employeservices.ajouterEmploye(emp);
 	 			 l.info("ajouter l'emplye dans la base de deonneés");
-	 			 Departement D1=drep.findById(id_departement).get();
-	 			 List <Employe> employes = D1.getEmployes();
-	 		   	 l.info("prendre la liste des employe affecter a la departement: "+D1);
-	 	         int expected = employes.size();
-	 	         l.info("prendre la tail la liste des employe affecter a la departement");
-	 			 employeservices.affecterEmployeADepartement(id_employe, id_departement);
-	 			 l.info("affecter l'employe a un partement");
-	 			 Departement D2=drep.findById(id_departement).get();
-	 			 l.info("prendre la liste des employe affecter a la departement: "+D2);
-	 			 assertEquals(expected+1, D2.getEmployes().size());
-	 			 l.info("comparaison size avant et apres l'affectation.");
-	 			 employerep.deleteAll();
-	 			 l.info("vider la base de donneé."); 
+	 			 Contrat C1=crep.findById(refContrat).get();
+	 		   	 l.info("trouver le contrat grace a sa reference: "+C1);
+	 	         assertNotNull(C1);
+	 	         l.info("verifier si le contrat existe");
+	 			 employeservices.affecterContratAEmploye(refContrat,id_employe);
+	 			 l.info("affecter le contrat a l employe");
+	 			 Contrat C2=crep.findByEmploye_Id(id_employe).get();
+	 			 l.info("verifier si l employe est affecte "+C2);
+	 	         l.info("vider la base de donneé.");
+	 	         crep.deleteAll();
+	 	         employerep.deleteAll();
+
 	 		}
-	 		catch (Exception e) {l.error("testAffecterEmployeADepartement() : " + e);}
+	 		catch (Exception e) {l.error("testAffecterContratAEmploye() : " + e);}
 	          }
-	        @Autowired
-	 		@Test
-	   public void testDesaffecterEmployeDuDepartement() {
-	 		try{
-	 			l.info("In testDesaffecterEmployeDuDepartement():");
-	 			 Employe emp =new Employe("aziz","charfeddine","azizcharfeddine@gmail.com",false,Role.INGENIEUR);
-	 			 l.info("creation d'un employe"+emp);
-	 			 Departement D=new Departement("Ressources Humaines");
-	 			 l.info("creation d'un departement"+D);
-	 			 int id_departement=entrepriseservice.ajouterDepartement(D);
-	 			 l.info("ajouter le departement dans la base de deonneés");
-	 			 int id_employe = employeservices.ajouterEmploye(emp);
-	 			 l.info("ajouter le employe dans la base de deonneés");
-	 			 employeservices.affecterEmployeADepartement(id_employe, id_departement);
-	 		     l.info("affecter l'employe a un partement");
-	 			 Departement D1=drep.findById(id_departement).get();
-	 			 List <Employe> employes = D1.getEmployes();
-	 			 l.info("prendre la liste des employe affecter a la departement: "+D1);
-	 	         int expected = employes.size();
-	 	         l.info("prendre la tail la liste des employe affecter a la departement");
-	 	         employeservices.desaffecterEmployeDuDepartement(id_employe, id_departement);
-	 	         l.info("desaffecter l'employe a un partement");
-	 			 Departement D2=drep.findById(id_departement).get();
-	 			 l.info("prendre la liste des employe affecter a la departement: "+D2);
-	 			 assertEquals(expected, D2.getEmployes().size());
-	 			 l.info("comparaison size avant et apres l'affectation.");
-	 			 employerep.deleteAll();
-	 			 l.info("vider la base de donneé."); 
-	 		}
-	 		catch (Exception e) {l.error("testDesaffecterEmployeDuDepartement() : " + e);}
-	          }
+	   @Autowired
+		@Test
+		public void testdeleteContratById() {
+		   try{
+				l.info("In testdeleteContratById():");
+				l.info("On verife le nombre de contrat existant");
+		         List <Contrat> contrats = (List<Contrat>) crep.findAll();
+		         int existant = contrats.size();
+		        l.info("nombre de contrat: " + existant);
+				l.info("Je vais ajouter un contrat");
+				 String date1="7/05/2020";  
+	 	         Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(date1);  
+	 	         Contrat cont =new Contrat(date2,"temp",700);
+	 	         int refContrat=employeservices.ajouterContrat(cont);
+	 	         l.info("Je vais supprimer l'entreprise.");
+	 	         employeservices.deleteContratById(refContrat);
+	 	         l.info("On assure que le contrat est supprimé en comparant les tailles.");
+	 	         assertEquals(existant, ((List<Contrat>) crep.findAll()).size());
+	 	         l.info("donc testdeleteContratById()() sans erreurs.");
+			}
+		   catch (Exception e) { l.error("testdeleteContratById() : " + e); }
+	   }
+
 }
+
+
