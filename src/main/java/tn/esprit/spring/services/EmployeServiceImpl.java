@@ -40,7 +40,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Optional <Employe> employe1 = employeRepository.findById(employeId);
 		if (employe1.isPresent()) {
-			Employe employe = employeRepository.findById(employeId).get(); // no issue
+			Employe employe = employe1.get(); // no issue
 			employe.setEmail(email);
 			employeRepository.save(employe);
 		}
