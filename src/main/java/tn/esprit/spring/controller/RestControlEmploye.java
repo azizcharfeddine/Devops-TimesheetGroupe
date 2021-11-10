@@ -59,7 +59,7 @@ public class RestControlEmploye {
 		
 	}
 	
-	// http://localhost:8081/SpringMVC/servlet/desaffecterEmployeDuDepartement/1/1
+	// http://localhost:8081/SpringMVCccc/servlet/desaffecterEmployeDuDepartement/1/1
 	@PutMapping(value = "/desaffecterEmployeDuDepartement/{idemp}/{iddept}") 
 	public void desaffecterEmployeDuDepartement(@PathVariable("idemp")int employeId, @PathVariable("iddept")int depId)
 	{
