@@ -1,0 +1,28 @@
+2021-11-10 23:55:34.520  INFO 18296 --- [restartedMain] tn.esprit.spring.TpTimesheetApplication  : Starting TpTimesheetApplication using Java 1.8.0_60 on DESKTOP-CS0DJGK with PID 18296 (C:\Users\asus\Desktop\Devops-TimesheetGroupe\target\classes started by asus in C:\Users\asus\Desktop\Devops-TimesheetGroupe)
+2021-11-10 23:55:34.521  INFO 18296 --- [restartedMain] tn.esprit.spring.TpTimesheetApplication  : No active profile set, falling back to default profiles: default
+2021-11-10 23:55:34.647  INFO 18296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-11-10 23:55:34.649  INFO 18296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2021-11-10 23:55:34.754  INFO 18296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
+2021-11-10 23:55:34.755  INFO 18296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-11-10 23:55:34.755  INFO 18296 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-11-10 23:55:34.826  INFO 18296 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-11-10 23:55:34.826  INFO 18296 --- [restartedMain] o.a.c.c.C.[.[localhost].[/SpringMVC]     : Initializing Spring embedded WebApplicationContext
+2021-11-10 23:55:34.827  INFO 18296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 305 ms
+2021-11-10 23:55:34.835  WARN 18296 --- [restartedMain] o.a.m.webapp.AbstractFacesInitializer    : No mappings of FacesServlet found. Abort initializing MyFaces.
+2021-11-10 23:55:34.835  INFO 18296 --- [restartedMain] o.a.m.w.StartupServletContextListener    : MyFaces Core has started, it took [3] ms.
+2021-11-10 23:55:34.856  INFO 18296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-11-10 23:55:34.860  INFO 18296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Starting...
+2021-11-10 23:55:34.864  INFO 18296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Start completed.
+2021-11-10 23:55:34.864  INFO 18296 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-11-10 23:55:34.872  INFO 18296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-11-10 23:55:34.872  INFO 18296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-11-10 23:55:34.880  INFO 18296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-11-10 23:55:34.892  WARN 18296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-11-10 23:55:34.920  INFO 18296 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-11-10 23:55:34.962  INFO 18296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path '/SpringMVC'
+2021-11-10 23:55:34.967  INFO 18296 --- [restartedMain] tn.esprit.spring.TpTimesheetApplication  : Started TpTimesheetApplication in 0.484 seconds (JVM running for 5132.104)
+2021-11-10 23:55:34.968  INFO 18296 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-11-10 23:55:48.339  INFO 18296 --- [Thread-73] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-11-10 23:55:48.339  INFO 18296 --- [Thread-73] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-11-10 23:55:48.340  INFO 18296 --- [Thread-73] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown initiated...
+2021-11-10 23:55:48.350  INFO 18296 --- [Thread-73] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown completed.
