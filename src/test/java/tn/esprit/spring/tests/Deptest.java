@@ -1,47 +1,33 @@
-package tn.esprit.spring;
-import static org.junit.Assert.*;
+package tn.esprit.spring.tests;
 
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Test;
 
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-
 import tn.esprit.spring.entities.Departement;
-import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
-import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.DepartementRepository;
-import tn.esprit.spring.repository.EmployeRepository;
-import tn.esprit.spring.services.EmployeServiceImpl;
+import tn.esprit.spring.repository.EntrepriseRepository;
 import tn.esprit.spring.services.IEntrepriseService;
-
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TpTimesheetApplicationTest {
+public class Deptest {
 	@Autowired
-private EmployeRepository employerep;
-	@Autowired
-private EmployeServiceImpl employeservices;
-	@Autowired
-private	DepartementRepository drep;
-	@Autowired
-private	IEntrepriseService entrepriseservice;
+	DepartementRepository drep;
 	@Autowired
 	IEntrepriseService service;
 	
-	
-	private static final Logger l = LoggerFactory.getLogger(TpTimesheetApplicationTest.class);
 	@Autowired
+	EntrepriseRepository rep;
+	
+	private static final Logger l = LogManager.getLogger(Deptest.class);
+	
 	@Test
 	public void testAjouterDepartement()
 	{
@@ -86,21 +72,23 @@ private	IEntrepriseService entrepriseservice;
 			l.info("Out testAffecterDepartement() sans erreurs.");
 		}catch (Exception e) { l.error("Erreur dans testAffecterDepartement() : " + e); }
 	}
-	 
-	        @Test
-	    	public void testSupprimerDepartement()
-	    	{
-	    		try{
-	    			l.info("In testSupprimerEntreprise():");
-	    			l.info("Je vais creer un departement.");
-	    			Departement D=new Departement("Ressources Humaines");
-	    			D.setEntreprise(null);
-	    			l.info("Je vais ajouter un departement.");
-	    			int id_departement=service.ajouterDepartement(D);
-	    			l.info("Je vais supprimer le departement.");
-	    			service.deleteDepartementById(id_departement);
-	    			l.info("Je vais m'assurer que la methode findDepartementById() retourne null.");
-	    			//assertNull(drep.findById(id_departement).orElse(null));
-	    		}catch (Exception e) { l.error("Erreur dans testSupprimerDepartement() : " + e); }
-	    	}
+	
+	@Test
+	public void testSupprimerDepartement()
+	{
+		try{
+			l.info("In testSupprimerEntreprise():");
+			l.info("Je vais creer un departement.");
+			Departement D=new Departement("Ressources Humaines");
+			D.setEntreprise(null);
+			l.info("Je vais ajouter un departement.");
+			int id_departement=service.ajouterDepartement(D);
+			l.info("Je vais supprimer le departement.");
+			service.deleteDepartementById(id_departement);
+			l.info("Je vais m'assurer que la methode findDepartementById() retourne null.");
+			//assertNull(drep.findById(id_departement).orElse(null));
+		}catch (Exception e) { l.error("Erreur dans testSupprimerDepartement() : " + e); }
+	}
 }
+
+
